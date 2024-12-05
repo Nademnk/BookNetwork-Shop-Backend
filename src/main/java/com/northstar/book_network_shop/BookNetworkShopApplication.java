@@ -14,7 +14,11 @@ import com.northstar.book_network_shop.role.RoleRepository;
 @SpringBootApplication
 @EnableJpaAuditing
 @EnableAsync
-@EntityScan(basePackages = "com.northstar.book_network_shop.user")
+@EntityScan(basePackages = {
+	    "com.northstar.book_network_shop.user",
+	    "com.northstar.book_network_shop.role" // Add the Role package here
+	})
+
 public class BookNetworkShopApplication {
 
 	public static void main(String[] args) {
