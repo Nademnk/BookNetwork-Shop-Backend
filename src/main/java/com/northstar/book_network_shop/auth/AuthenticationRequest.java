@@ -15,7 +15,7 @@ public class AuthenticationRequest {
 
 	@NotEmpty(message = "Email is mandatory")
 	@NotNull(message = "Email is mandatory")
-	private String email;
+	private String;
 
 	@NotEmpty(message = "Password is mandatory")
 	@NotNull(message = "Password is mandatory")
