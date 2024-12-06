@@ -17,6 +17,7 @@ import com.northstar.book_network_shop.user.User;
 import com.northstar.book_network_shop.user.UserRepository;
 
 import jakarta.mail.MessagingException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -89,5 +90,12 @@ public class AuthenticationService {
         
 		return codeBuilder.toString();
 	}
+
+	public AuthenticationResponse authenticate(AuthenticationRequest request) {
+		
+		return null;
+	}
+
+	
 
 }
