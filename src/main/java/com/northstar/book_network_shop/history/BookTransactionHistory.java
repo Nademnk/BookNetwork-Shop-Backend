@@ -1,7 +1,6 @@
 package com.northstar.book_network_shop.history;
 
 import com.northstar.book_network_shop.common.CommonClass;
-import com.northstar.book_network_shop.feedback.Feedback;
 
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
