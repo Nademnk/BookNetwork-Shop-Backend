@@ -1,11 +1,15 @@
 package com.northstar.book_network_shop.book;
 
+import java.util.List;
+
 import com.northstar.book_network_shop.common.CommonClass;
+import com.northstar.book_network_shop.feedback.Feedback;
 import com.northstar.book_network_shop.user.User;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,4 +42,7 @@ public class Book extends CommonClass {
 	@JoinColumn(name = "owner_id")
 	private User owner;
 
+	@OneToMany(mappedBy = "book")
+	private List<Feedback> feedback;
+	
 }
