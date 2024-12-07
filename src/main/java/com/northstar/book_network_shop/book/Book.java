@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.northstar.book_network_shop.common.CommonClass;
 import com.northstar.book_network_shop.feedback.Feedback;
+import com.northstar.book_network_shop.history.BookTransactionHistory;
 import com.northstar.book_network_shop.user.User;
 
 import jakarta.persistence.Entity;
@@ -44,5 +45,8 @@ public class Book extends CommonClass {
 
 	@OneToMany(mappedBy = "book")
 	private List<Feedback> feedback;
+	
+	@OneToMany(mappedBy = "book")
+	private List<BookTransactionHistory> histories;
 	
 }

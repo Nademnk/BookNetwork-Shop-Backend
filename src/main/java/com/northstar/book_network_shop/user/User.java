@@ -1,6 +1,7 @@
 package com.northstar.book_network_shop.user;
 
 import com.northstar.book_network_shop.book.Book;
+import com.northstar.book_network_shop.history.BookTransactionHistory;
 import com.northstar.book_network_shop.role.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -50,6 +51,9 @@ public class User implements UserDetails, Principal {
     
     @OneToMany(mappedBy = "owner")
     private List<Book> books;
+    
+    @OneToMany(mappedBy = "user")
+	private List<BookTransactionHistory> histories;
     
     @CreatedDate
     @Column(nullable = false, updatable = false)
