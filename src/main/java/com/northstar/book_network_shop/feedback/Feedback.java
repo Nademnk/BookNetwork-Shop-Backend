@@ -1,4 +1,4 @@
-package com.northstar.book_network_shop.book;
+package com.northstar.book_network_shop.feedback;
 
 import com.northstar.book_network_shop.common.CommonClass;
 
@@ -15,23 +15,13 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Book extends CommonClass{
+public class Feedback extends CommonClass{
 
 	
+	private Double note;
 	
-	private String title;
+	private String comment;
 	
-	private String authorName;
-	
-	private String isbn;
-	
-	private String synopsis;
-	
-	private String bookCover;
-	
-	private boolean archived;
-	
-	private boolean shareable;
 	
 	
 }
