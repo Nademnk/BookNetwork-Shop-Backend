@@ -12,7 +12,7 @@ import com.northstar.book_network_shop.role.Role;
 import com.northstar.book_network_shop.role.RoleRepository;
 
 @SpringBootApplication
-@EnableJpaAuditing
+@EnableJpaAuditing(auditorAwareRef = "auditorAware")
 @EnableAsync
 @EntityScan(basePackages = {
 	    "com.northstar.book_network_shop.user",
