@@ -26,7 +26,7 @@ public class BookTransactionHistory extends CommonClass{
 	private User user;
 	
 	@ManyToOne
-	@JoinColumn(name = "boo_id")
+	@JoinColumn(name = "book_id")
 	private Book book; 
 	
 	private boolean returned;

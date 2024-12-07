@@ -16,7 +16,10 @@ import com.northstar.book_network_shop.role.RoleRepository;
 @EnableAsync
 @EntityScan(basePackages = {
 	    "com.northstar.book_network_shop.user",
-	    "com.northstar.book_network_shop.role" // Add the Role package here
+	    "com.northstar.book_network_shop.role", // Add the Role package here
+	    "com.northstar.book_network_shop.book",
+	    "com.northstar.book_network_shop.history",
+	    "com.northstar.book_network_shop.feedback",
 	})
 
 public class BookNetworkShopApplication {
