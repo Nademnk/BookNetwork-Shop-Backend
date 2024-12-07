@@ -1,5 +1,6 @@
 package com.northstar.book_network_shop.user;
 
+import com.northstar.book_network_shop.book.Book;
 import com.northstar.book_network_shop.role.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -43,6 +44,13 @@ public class User implements UserDetails, Principal {
     private boolean accountLocked;
     private boolean enabled;
 
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Role> roles;
+    
+    @OneToMany(mappedBy = "owner")
+    private List<Book> books;
+    
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdDate;
@@ -51,8 +59,7 @@ public class User implements UserDetails, Principal {
     @Column(insertable = false)
     private LocalDateTime lastModifiedDate;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Role> roles;
+   
 
     @Override
     public String getName() {
