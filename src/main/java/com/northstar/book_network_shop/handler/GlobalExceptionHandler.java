@@ -19,6 +19,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.northstar.book_network_shop.exception.OperationNotPermittedException;
+
 import jakarta.mail.MessagingException;
 
 
@@ -76,6 +78,17 @@ public class GlobalExceptionHandler {
 	    public ResponseEntity<ExceptionResponse> handleException(MessagingException exp) {
 	        return ResponseEntity
 	                .status(INTERNAL_SERVER_ERROR)
+	                .body(
+	                        ExceptionResponse.builder()
+	                                .error(exp.getMessage())
+	                                .build()
+	                );
+	    }
+	 
+	 @ExceptionHandler(OperationNotPermittedException.class)
+	    public ResponseEntity<ExceptionResponse> handleException(OperationNotPermittedException exp) {
+	        return ResponseEntity
+	                .status(BAD_REQUEST)
 	                .body(
 	                        ExceptionResponse.builder()
 	                                .error(exp.getMessage())
