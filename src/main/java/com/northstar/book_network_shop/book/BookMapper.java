@@ -2,6 +2,8 @@ package com.northstar.book_network_shop.book;
 
 import org.springframework.stereotype.Service;
 
+import com.northstar.book_network_shop.history.BookTransactionHistory;
+
 @Service
 public class BookMapper {
 
@@ -32,4 +34,17 @@ public class BookMapper {
                 //.cover(FileUtils.readFileFromLocation(book.getBookCover()))
                 .build();
 	}
+	
+	public BorrowedBookResponse toBorrowedBookResponse(BookTransactionHistory history) {
+	return BorrowedBookResponse.builder()
+			.id(history.getBook().getId())
+            .title(history.getBook().getTitle())
+            .authorName(history.getBook().getAuthorName())
+            .isbn(history.getBook().getIsbn())
+            .rate(history.getBook().getRate())
+            .returned(history.isReturned())
+            .returnApproved(history.isReturnApproved())
+            .build();
+	}
+	
 }

@@ -10,6 +10,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import com.northstar.book_network_shop.common.PageResponses;
+import com.northstar.book_network_shop.history.BookTransactionHistory;
+import com.northstar.book_network_shop.history.BookTransactionHistoryRepository;
 import com.northstar.book_network_shop.user.User;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -23,6 +25,8 @@ public class BookService {
 
 	private final BookMapper bookMapper;
 	private final BookRepository bookRepository;
+	private final BookTransactionHistoryRepository transactionHistoryRepository;
+	
 	
 	  public Integer save(BookRequest request, Authentication connectedUser) {
 		  User user = ((User) connectedUser.getPrincipal());
@@ -72,6 +76,24 @@ public class BookService {
 	                books.isFirst(),
 	                books.isLast()
 	        );
+	}
+
+	public PageResponses<BorrowedBookResponse> findAllBorrowedBooks(int page, int size, Authentication connectedUser) {
+		  User user = ((User) connectedUser.getPrincipal());
+		  Pageable pageable= PageRequest.of(page, size,Sort.by( "createdDate").descending());
+		  Page<BookTransactionHistory> allBorrowedBooks = transactionHistoryRepository.findAllBorrowedBooks(pageable, user.getId());
+		  List<BorrowedBookResponse> bookResponse = allBorrowedBooks.stream()
+				  .map(bookMapper::toBorrowedBookResponse)
+				  .toList();
+		return  new PageResponses<>(
+                bookResponse,
+                allBorrowedBooks.getNumber(),
+                allBorrowedBooks.getSize(),
+                allBorrowedBooks.getTotalElements(),
+                allBorrowedBooks.getTotalPages(),
+                allBorrowedBooks.isFirst(),
+                allBorrowedBooks.isLast()
+        );
 	}
 	
 }
