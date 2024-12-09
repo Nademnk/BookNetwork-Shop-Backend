@@ -43,6 +43,9 @@ public class FeedBackController {
 		
 		return ResponseEntity.ok(service.findallFeedbacksByBook(bookId, page, size, connectedUser) );
 	}
+	
+	@GetMapping("/book/{book-id}")
+	
 }
 
 
