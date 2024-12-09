@@ -2,6 +2,7 @@ package com.northstar.book_network_shop.book;
 
 import org.springframework.stereotype.Service;
 
+import com.northstar.book_network_shop.file.FileUtils;
 import com.northstar.book_network_shop.history.BookTransactionHistory;
 
 @Service
@@ -31,7 +32,7 @@ public class BookMapper {
                 .archived(book.isArchived())
                 .shareable(book.isShareable())
                  .owner(book.getOwner().fullName())
-                //.cover(FileUtils.readFileFromLocation(book.getBookCover()))
+                .cover(FileUtils.readFileFromLocation(book.getBookCover()))
                 .build();
 	}
 	
