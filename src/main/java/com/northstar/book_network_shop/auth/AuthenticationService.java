@@ -43,9 +43,15 @@ public class AuthenticationService {
 
 		var userRole = roleRepository.findByName("USER")
 				.orElseThrow(() -> new IllegalStateException("ROLE USER was not initiated"));
-		var user = User.builder().firstname(request.getFirstname()).lastname(request.getLastname())
-				.email(request.getEmail()).password(passwordEncoder.encode(request.getPassword())).accountLocked(false)
-				.enabled(false).roles(List.of(userRole)).build();
+		var user = User.builder()
+				.firstname(request.getFirstname())
+				.lastname(request.getLastname())
+				.email(request.getEmail())
+				.password(passwordEncoder.encode(request.getPassword()))
+				.accountLocked(false)
+				.enabled(false)
+				.roles(List.of(userRole))
+				.build();
 		userRepository.save(user);
 		sendValidationEmail(user);
 	}
@@ -53,7 +59,10 @@ public class AuthenticationService {
 	private void sendValidationEmail(User user) throws MessagingException {
 		var newToken = generateAndSaveActivationToken(user);
 
-		emailService.sendEmail(user.getEmail(), user.fullName(), EmailTemplateName.ACTIVATE_ACCOUNT, activationUrl,
+		emailService.sendEmail(user.getEmail(), 
+				user.fullName(), 
+				EmailTemplateName.ACTIVATE_ACCOUNT, 
+				activationUrl,
 				newToken, "Account activation");
 
 	}
@@ -61,8 +70,12 @@ public class AuthenticationService {
 	private String generateAndSaveActivationToken(User user) {
 
 		String generatedToken = generateActivationCode(6);
-		var token = Token.builder().token(generatedToken).createdAt(LocalDateTime.now())
-				.expiresAt(LocalDateTime.now().plusMinutes(15)).user(user).build();
+		var token = Token.builder()
+				.token(generatedToken)
+				.createdAt(LocalDateTime.now())
+				.expiresAt(LocalDateTime.now().plusMinutes(15))
+				.user(user)
+				.build();
 		tokenRepository.save(token);
 
 		return generatedToken;

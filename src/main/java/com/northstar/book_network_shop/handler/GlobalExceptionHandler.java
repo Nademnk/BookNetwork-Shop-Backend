@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.LockedException;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -27,8 +28,9 @@ import jakarta.mail.MessagingException;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-	@ExceptionHandler(DisabledException.class)
-	public ResponseEntity<ExceptionResponse> handleException(DisabledException exp){
+	
+	@ExceptionHandler(LockedException.class)
+	public ResponseEntity<ExceptionResponse> handleException(LockedException exp){
 		
 		return ResponseEntity
 				.status(UNAUTHORIZED)
@@ -44,8 +46,9 @@ public class GlobalExceptionHandler {
 		
 	}
 	
-	@ExceptionHandler(LockedException.class)
-	public ResponseEntity<ExceptionResponse> handleException(LockedException exp){
+	
+	@ExceptionHandler(DisabledException.class)
+	public ResponseEntity<ExceptionResponse> handleException(DisabledException exp){
 		
 		return ResponseEntity
 				.status(UNAUTHORIZED)
@@ -60,6 +63,8 @@ public class GlobalExceptionHandler {
 						);
 		
 	}
+	
+	
 	
 	 @ExceptionHandler(BadCredentialsException.class)
 	    public ResponseEntity<ExceptionResponse> handleException(BadCredentialsException exp) {
@@ -101,7 +106,7 @@ public class GlobalExceptionHandler {
 	        Set<String> errors = new HashSet<>();
 	        exp.getBindingResult().getAllErrors()
 	                .forEach(error -> {
-	                    //var fieldName = ((FieldError) error).getField();
+	                    var fieldName = ((FieldError) error).getField();
 	                    var errorMessage = error.getDefaultMessage();
 	                    errors.add(errorMessage);
 	                });
@@ -110,7 +115,7 @@ public class GlobalExceptionHandler {
 	                .status(BAD_REQUEST)
 	                .body(
 	                        ExceptionResponse.builder()
-	                                .validationErros(errors)
+	                                .validationErrors(errors)
 	                                .build()
 	                );
 	    }

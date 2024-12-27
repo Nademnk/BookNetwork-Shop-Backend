@@ -17,9 +17,9 @@ public enum BusinessErrorCodes {
 	
 	ACCOUNT_DISABLED(303, FORBIDDEN, "User account is disabled"),
 	
-	BAD_CREDENTIALS(304, FORBIDDEN, "User account is locked"),
+	BAD_CREDENTIALS(304, FORBIDDEN, "Login again / or password is incorrect"),
 	
-	ACCOUNT_LOCKED(302, FORBIDDEN, "Login again / or password is incorrect"),;
+	ACCOUNT_LOCKED(302, FORBIDDEN, "User account is locked"),;
 	
 	@Getter
 	private final int code;

@@ -28,8 +28,8 @@ public class BookNetworkShopApplication {
 		SpringApplication.run(BookNetworkShopApplication.class, args);
 	}
 
-	@Bean
-		public CommandLineRunner runner(RoleRepository roleRepository) {
+    @Bean
+   public CommandLineRunner runner(RoleRepository roleRepository) {
 			return args -> {
 				if (roleRepository.findByName("USER").isEmpty()) {
 					roleRepository.save(Role.builder().name("USER").build());
